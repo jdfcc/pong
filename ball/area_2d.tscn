@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://cas30dohswkfd"]
+
+[ext_resource type="Texture2D" uid="uid://dovv266yuywmc" path="res://img/ball.png" id="1_sl7wj"]
+
+[sub_resource type="GDScript" id="GDScript_s7nhy"]
+script/source = "extends Area2D
+
+var vec:Vector2=Vector2(5,5)
+
+var init_position:Vector2
+
+func reset():
+	if vec.x>0:
+		Count.p1=Count.p1+1
+	else :
+		Count.p2=Count.p2+1
+	
+	position=init_position
+# Called when the node enters the scene tree for the first time.
+
+func _ready():
+	self.add_to_group(\"Ball\")
+	init_position=position
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	position=position+vec
+	pass
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ndt42"]
+radius = 5.0
+
+[node name="Area2D" type="Area2D"]
+position = Vector2(20, 20)
+script = SubResource("GDScript_s7nhy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ndt42")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_sl7wj")
